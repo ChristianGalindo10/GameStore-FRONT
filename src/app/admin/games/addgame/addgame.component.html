@@ -1,0 +1,25 @@
+<h1>{{game.id == null ? 'Add' : 'Edit'}} Game - {{game.id}}</h1>
+
+<form>
+  <label for="name">Name</label>
+  <input type="text" class="form-control" id="name" placeholder="Game Name" name="name" [(ngModel)]="game.name" >
+
+  <label for="developer">Developer</label>
+  <input type="text" class="form-control" id="developer" placeholder="developer" name="developer" [(ngModel)]="game.developer">
+
+  <label for="price">Price</label>
+  <input type="text" class="form-control" id="price" placeholder="price" name="price" [(ngModel)]="game.price">
+
+
+    <br>
+    <label for="image">Image</label>
+    <br>
+    <img *ngIf="game.id != null && !imgURL" [src]="game.retrievedImage" height="200" width="200" >
+    <br *ngIf="game.id != null && !imgURL">
+    <label *ngIf="game.id != null && !imgURL" for="updImage">Update image</label>
+    <br *ngIf="game.id != null && !imgURL">
+    <input type="file" (change)="onFileChanged($event)">
+    <img *ngIf="imgURL" [src]="imgURL" height="200" width="200" >
+  <br>
+  <button type="button" class="btn btn-success" (click)="saveGame()">Save Game</button>
+</form>

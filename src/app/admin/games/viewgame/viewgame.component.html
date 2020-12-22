@@ -1,0 +1,25 @@
+<h1>Game Details</h1>
+
+    <table>
+        <tr>
+            <td>Game Id</td>
+            <td>{{game.id}}</td>
+        </tr>
+        <tr>
+            <td>Game Name</td>
+            <td>{{game.name}}</td>
+        </tr>
+        <tr>
+            <td>Game Developer</td>
+            <td>{{game.developer}}</td>
+        </tr>
+        <tr>
+            <td>Game Price</td>
+            <td>{{game.price}}</td>
+        </tr>
+    </table>
+    <br>
+    <img src="{{game.retrievedImage}}" height="200" width="200">
+    <br><br>
+    <a class="btn btn-small btn-warning" (click)="editGame()">Edit</a>
+    <a class="btn btn-small btn-danger" (click)="deleteGame()">Delete</a>
