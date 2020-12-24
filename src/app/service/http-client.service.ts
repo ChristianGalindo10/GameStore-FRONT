@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from "rxjs/internal/Observable";
+import { map } from "rxjs/operators";
+import { isNullOrUndefined } from "util";
 import { User } from '../model/User';
 import { Game } from '../model/Game';
 
@@ -10,13 +13,13 @@ export class HttpClientService {
 
   constructor(private httpClient:HttpClient) { }
 
+  headers: HttpHeaders = new HttpHeaders({
+    "Content-Type": "application/json"
+  });
+
   getUsers()
   {
     return this.httpClient.get<User[]>('http://localhost:8080/users/get');
-  }
-
-  addUser(newUser: User) {
-    return this.httpClient.post<User>('http://localhost:8080/users/add', newUser);
   }
 
   deleteUser(id) {

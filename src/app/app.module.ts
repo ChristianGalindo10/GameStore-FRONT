@@ -13,6 +13,11 @@ import { GamesComponent } from './admin/games/games.component';
 import { AddgameComponent } from './admin/games/addgame/addgame.component';
 import { ViewgameComponent } from './admin/games/viewgame/viewgame.component';
 import { ShopgameComponent } from './shopgame/shopgame.component';
+import { LoginComponent } from './login/login.component';
+import { SigninComponent } from './login/signin/signin.component';
+import { interceptorProvider } from './interceptors/prod-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr'
 
 @NgModule({
   declarations: [
@@ -24,15 +29,19 @@ import { ShopgameComponent } from './shopgame/shopgame.component';
     GamesComponent,
     AddgameComponent,
     ViewgameComponent,
-    ShopgameComponent
+    ShopgameComponent,
+    LoginComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

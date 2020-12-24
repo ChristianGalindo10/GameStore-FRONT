@@ -4,11 +4,13 @@
     <input type="checkbox" id="menu-bar">
     <label class="material-icons" for="menu-bar">menu</label>
     <nav class="menu">
-      <a href="#">Inicio</a>
-      <a routerLink="/shop">Juegos</a>
-      <a href="#">Ofertas</a>
-      <a href="#">Carrito</a>
-      <div class="dropdown">
+      <a href="#">Home</a>
+      <a routerLink="/shop">Games</a>
+      <a href="#">Deals</a>
+      <a href="#" *ngIf="isLogged">Shopping cart</a>
+      <a href="#" *ngIf="!isLogged" routerLink="/login">Log In</a>
+      <a href="#" *ngIf="isLogged" (click)="onLogOut()">Log Out</a>
+      <div class="dropdown" *ngIf="isAdmin">
         <a href="#">
           Admin
         </a>

@@ -44,7 +44,7 @@ export class UsersComponent implements OnInit {
   viewUser(id: number) {
     this.router.navigate(['admin','users'], {queryParams : {id, action: 'view'}});
   }
-  
+
   addUser() {
     this.selectedUser = new User();
     this.router.navigate(['admin', 'users'], { queryParams: { action: 'add' } });

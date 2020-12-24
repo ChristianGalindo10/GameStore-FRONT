@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../../model/User';
 import { HttpClientService } from '../../../service/http-client.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-adduser',
@@ -16,16 +18,28 @@ export class AdduserComponent implements OnInit {
   @Output()
   userAddedEvent = new EventEmitter();
 
-  constructor(private httpClientService: HttpClientService, private router: Router) { }
+  errMsj: string;
+
+  constructor(private httpClientService: HttpClientService, private authService: AuthService,private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   addUser() {
-    this.httpClientService.addUser(this.user).subscribe(
-      (user) => {
+    this.user = new User(this.user.name, this.user.password,this.user.type);
+    this.authService.nuevo(this.user).subscribe(
+      data => {
+        this.toastr.success('Account created', 'OK', {
+          timeOut: 3000, positionClass: 'toast-top-center'
+        });
         this.userAddedEvent.emit();
         this.router.navigate(['admin', 'users']);
+      },
+      err => {
+        this.errMsj = err.error.mensaje;
+        this.toastr.error(this.errMsj, 'Fail', {
+          timeOut: 3000,  positionClass: 'toast-top-center',
+        });
       }
     );
   }
