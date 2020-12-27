@@ -17,7 +17,10 @@ import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { interceptorProvider } from './interceptors/prod-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr'
+import { ToastrModule } from 'ngx-toastr';
+import { CategoriesComponent } from './admin/categories/categories.component';
+import { AddcategoryComponent } from './admin/categories/addcategory/addcategory.component';
+import { ViewcategoryComponent } from './admin/categories/viewcategory/viewcategory.component'
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { ToastrModule } from 'ngx-toastr'
     ViewgameComponent,
     ShopgameComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    CategoriesComponent,
+    AddcategoryComponent,
+    ViewcategoryComponent
   ],
   imports: [
     BrowserModule,

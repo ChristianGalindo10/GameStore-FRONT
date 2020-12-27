@@ -33,7 +33,7 @@ export class SigninComponent implements OnInit {
   }
 
   onRegister(): void {
-    this.type = 'user';
+    this.type = 'admin';
     this.newUser = new User(this.name, this.password,this.type);
     this.authService.nuevo(this.newUser).subscribe(
       data => {

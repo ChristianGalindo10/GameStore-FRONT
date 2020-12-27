@@ -1,0 +1,27 @@
+<h1>Categories Admin</h1>
+<a class="btn btn-primary mb-3" (click)="addCategory()">add</a>
+<div class="container row">
+    <div   class="col-md-6">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let category of categories" >
+        <td>{{category.id}}</td>
+        <td>{{category.name}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="viewCategory(category.id)">Show Details</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div   class="col-md-6">
+    <app-addcategory *ngIf="action === 'add'"  [category]="selectedCategory" (categoryAddedEvent)="refreshData()"></app-addcategory>
+    <app-viewcategory *ngIf="action === 'view'" [category]="selectedCategory" (categoryDeletedEvent)="refreshData()"></app-viewcategory>
+  </div>
+</div>
+

@@ -1,0 +1,9 @@
+<h1>Add Category</h1>
+<form #recievedCategory="ngForm">
+
+  <label for="name">Name</label>
+  <input type="text" class="form-control" id="name" placeholder="category name" [(ngModel)]="category.name" name="name">
+
+   <br>
+  <button type="button" class="btn btn-success" (click)="addCategory()">Save</button>
+</form>
