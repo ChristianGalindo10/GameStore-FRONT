@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from '../../model/Game';
 import { HttpClientService } from '../../service/http-client.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../../model/Category';
 
 @Component({
   selector: 'app-games',
@@ -20,6 +21,7 @@ export class GamesComponent implements OnInit {
   ngOnInit(): void {
     this.refreshData();
   }
+
 
   refreshData() {
     this.httpClientService.getGames().subscribe(
@@ -42,7 +44,6 @@ export class GamesComponent implements OnInit {
       }
     );
   }
-
   // we will be taking the games response returned from the database
   // and we will be adding the retrieved
   handleSuccessfulResponse(response) {
@@ -58,6 +59,9 @@ export class GamesComponent implements OnInit {
       gamewithRetrievedImageField.developer = game.developer;
       gamewithRetrievedImageField.price = game.price;
       gamewithRetrievedImageField.picByte = game.picByte;
+      gamewithRetrievedImageField.idCatT = game.idCatT;
+      gamewithRetrievedImageField.categoryId = game.categoryId;
+      gamewithRetrievedImageField.categoryName = game.categoryName;
       this.games.push(gamewithRetrievedImageField);
     }
   }

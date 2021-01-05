@@ -8,8 +8,8 @@
       <a routerLink="/shop">Games</a>
       <a href="#">Deals</a>
       <a href="#" *ngIf="isLogged">Shopping cart</a>
-      <a href="#" *ngIf="!isLogged" routerLink="/login">Log In</a>
-      <a href="#" *ngIf="isLogged" (click)="onLogOut()">Log Out</a>
+      <a href="#" *ngIf="!isLogged" routerLink="/login"><span class="material-icons">login</span>Log In</a>
+      <a href="#" *ngIf="isLogged" (click)="onLogOut()"><span class="material-icons">exit_to_app</span>Log Out</a>
       <div class="dropdown" *ngIf="isAdmin">
         <a href="#">
           Admin

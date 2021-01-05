@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         this.isLogged = false;
-        this.errMsj = err.error.message;
+        this.errMsj = "Invalid username or password";
         this.toastr.error(this.errMsj, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-center',
         });

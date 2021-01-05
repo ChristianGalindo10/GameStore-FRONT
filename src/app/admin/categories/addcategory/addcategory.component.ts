@@ -26,21 +26,37 @@ export class AddcategoryComponent implements OnInit {
   }
 
   addCategory() {
-    this.httpClientService.addCategory(this.category).subscribe(
-      (category) => {
-        this.toastr.success('Category created', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
-        });
-        this.categoryAddedEvent.emit();
-        this.router.navigate(['admin', 'categories']);
-      },
-      err => {
-        this.errMsj = err.error.mensaje;
-        this.toastr.error(this.errMsj, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
-        });
-      }
-    );
+    if (this.category.idCat == null) {
+      this.httpClientService.addCategory(this.category).subscribe(
+        (category) => {
+          this.toastr.success('Category created', 'OK', {
+            timeOut: 3000, positionClass: 'toast-top-center'
+          });
+          this.categoryAddedEvent.emit();
+          this.router.navigate(['admin', 'categories']);
+        },
+        err => {
+          this.errMsj = err.error.mensaje;
+          this.toastr.error(this.errMsj, 'Fail', {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }
+      );
+    }else{
+      this.httpClientService.updateCategory(this.category).subscribe(
+        (category) => {
+          this.toastr.success('Category updated', 'OK', {
+            timeOut: 3000, positionClass: 'toast-top-center'
+          });
+          this.categoryAddedEvent.emit();
+          this.router.navigate(['admin', 'categories']);
+        },
+        err => {
+          this.toastr.error(err.error.mensaje, 'Fail', {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }
+      );
+    }
   }
-
 }

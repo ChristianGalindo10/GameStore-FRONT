@@ -21,16 +21,16 @@ export class CategoriesComponent implements OnInit {
   }
 
   refreshData() {
+
     this.httpClientService.getCategories().subscribe(
       response => this.handleSuccessfulResponse(response),
     );
-
     this.activatedRoute.queryParams.subscribe(
       (params) => {
         this.action = params['action'];
-        const selectedCategoryId = params['id'];
+        const selectedCategoryId = params['idCat'];
         if (selectedCategoryId) {
-          this.selectedCategory = this.categories.find(category => category.id === +selectedCategoryId);
+          this.selectedCategory = this.categories.find(category => category.idCat === +selectedCategoryId);
         }
       }
     );
@@ -40,8 +40,8 @@ export class CategoriesComponent implements OnInit {
     this.categories = response;
   }
 
-  viewCategory(id: number) {
-    this.router.navigate(['admin','categories'], {queryParams : {id, action: 'view'}});
+  viewCategory(idCat: number) {
+    this.router.navigate(['admin','categories'], {queryParams : {idCat, action: 'view'}});
   }
 
   addCategory() {

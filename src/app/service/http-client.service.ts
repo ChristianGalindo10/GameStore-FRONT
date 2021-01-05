@@ -21,7 +21,7 @@ export class HttpClientService {
   }
 
   getGames() {
-    return this.httpClient.get<Game[]>('http://localhost:8080/games/get');
+    return this.httpClient.get<Array<Game>>('http://localhost:8080/games/get');
   }
 
   addUploadData(selectedFile) {
@@ -46,11 +46,19 @@ export class HttpClientService {
 
   getCategories()
   {
-    return this.httpClient.get<Category[]>('http://localhost:8080/categories/get');
+    return this.httpClient.get<Array<Category>>('http://localhost:8080/categories/get');
   }
 
+  getCategory(idCat)
+  {
+    return this.httpClient.get<Category>('http://localhost:8080/categories/get/' + idCat);
+  }
   addCategory(newCategory) {
     return this.httpClient.post<Category>('http://localhost:8080/categories/add', newCategory);
+  }
+
+  updateCategory(updatedCategory) {
+    return this.httpClient.put<Category>('http://localhost:8080/categories/update', updatedCategory);
   }
 
   deleteCategory(id) {

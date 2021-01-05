@@ -1,4 +1,7 @@
+import { Game } from "./Game";
+
 export class Category {
-  id: number;
+  idCat: number;
   name: string;
+  games: Array<Game>;
 }

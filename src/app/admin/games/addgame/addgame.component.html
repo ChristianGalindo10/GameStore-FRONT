@@ -8,8 +8,13 @@
   <input type="text" class="form-control" id="developer" placeholder="developer" name="developer" [(ngModel)]="game.developer">
 
   <label for="price">Price</label>
-  <input type="text" class="form-control" id="price" placeholder="price" name="price" [(ngModel)]="game.price">
+  <input type="number" class="form-control" id="price" placeholder="price" name="price" [(ngModel)]="game.price">
 
+  <label for="category">Category</label>
+  <select name="categoryselect" [(ngModel)]="game.categoryId">
+    <option [value]="-1">Any</option>
+    <option [value]="category.idCat" *ngFor="let category of categories">{{category.name}}</option>
+  </select>
 
     <br>
     <label for="image">Image</label>

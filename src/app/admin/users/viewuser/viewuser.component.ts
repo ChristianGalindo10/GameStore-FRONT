@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../../model/User';
 import { HttpClientService } from '../../../service/http-client.service';
 import { Router } from '@angular/router';
-import { TokenService } from '../../../service/token.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-viewuser',
@@ -17,7 +17,7 @@ export class ViewuserComponent implements OnInit {
   @Output()
   userDeletedEvent = new EventEmitter();
 
-  constructor(private httpClientService: HttpClientService, private router: Router) { }
+  constructor(private httpClientService: HttpClientService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +25,9 @@ export class ViewuserComponent implements OnInit {
   deleteUser() {
     this.httpClientService.deleteUser(this.user.id).subscribe(
       (user) => {
+        this.toastr.success('Account deleted', 'OK', {
+          timeOut: 3000, positionClass: 'toast-top-center'
+        });
         this.userDeletedEvent.emit();
         this.router.navigate(['admin', 'users']);
       }

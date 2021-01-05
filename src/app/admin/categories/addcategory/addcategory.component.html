@@ -1,9 +1,16 @@
-<h1>Add Category</h1>
+<h1>{{category.idCat == null ? 'Add' : 'Edit'}} Category - {{category.idCat}}</h1>
 <form #recievedCategory="ngForm">
-
   <label for="name">Name</label>
-  <input type="text" class="form-control" id="name" placeholder="category name" [(ngModel)]="category.name" name="name">
+  <input type="text" class="form-control" id="name" placeholder="category name" [(ngModel)]="category.name"
+    name="name" />
+  <br>
+  <ng-container *ngIf="category.idCat != null">
+    <div style="display: grid;">
+      <label *ngFor="let game of games2">{{game.name}}
+        <input #game.name type="checkbox" [(ngModel)]="game.nameisChecked" name="label{{game.name}}"
+          (change)="addGame(game,game.nameisChecked)" /></label>
+    </div>
+  </ng-container>
 
-   <br>
   <button type="button" class="btn btn-success" (click)="addCategory()">Save</button>
 </form>

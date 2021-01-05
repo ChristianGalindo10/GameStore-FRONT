@@ -1,20 +1,24 @@
 <h1>Game Details</h1>
-
-    <table>
+    <table class="table">
         <tr>
-            <td>Game Id</td>
-            <td>{{game.id}}</td>
+            <th scope="col">Game Id</th>
+            <td scope="col">{{game.id}}</td>
         </tr>
         <tr>
-            <td>Game Name</td>
+          <th>Category</th>
+          <td *ngIf="game.idCatT!=-1">{{game.categoryName}}</td>
+          <td *ngIf="game.idCatT==-1">Ninguna</td>
+      </tr>
+        <tr>
+            <th>Game Name</th>
             <td>{{game.name}}</td>
         </tr>
         <tr>
-            <td>Game Developer</td>
+            <th>Game Developer</th>
             <td>{{game.developer}}</td>
         </tr>
         <tr>
-            <td>Game Price</td>
+            <th>Game Price</th>
             <td>{{game.price}}</td>
         </tr>
     </table>
