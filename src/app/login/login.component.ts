@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
         window.location.assign("/shop");
-        //this.router.navigate(['/shop']);
       },
       err => {
         this.isLogged = false;
@@ -57,7 +56,6 @@ export class LoginComponent implements OnInit {
         this.toastr.error(this.errMsj, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-center',
         });
-        // console.log(err.error.message);
       }
     );
   }

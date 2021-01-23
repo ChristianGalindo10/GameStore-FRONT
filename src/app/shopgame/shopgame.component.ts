@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from '../service/http-client.service';
 import { Game } from '../model/Game';
@@ -11,6 +11,9 @@ import { Game } from '../model/Game';
 export class ShopgameComponent implements OnInit {
 
   games: Array<Game>;
+
+  gamesOut: Array<Game>;
+
   gamesRecieved: Array<Game>;
   isOpen: boolean;
 
@@ -24,7 +27,7 @@ export class ShopgameComponent implements OnInit {
       response => this.handleSuccessfulResponse(response),
     );
     //from localstorage retrieve the cart item
-    let data = localStorage.getItem('cart');
+    let data = sessionStorage.getItem('cart');
     //if this is not null convert it to JSON else initialize it as empty
     if (data !== null) {
       this.cartGames = JSON.parse(data);
@@ -41,7 +44,6 @@ export class ShopgameComponent implements OnInit {
     //get books returned by the api call
     this.gamesRecieved = response;
     for (const game of this.gamesRecieved) {
-
       const gamewithRetrievedImageField = new Game();
       gamewithRetrievedImageField.id = game.id;
       gamewithRetrievedImageField.name = game.name;
@@ -55,13 +57,13 @@ export class ShopgameComponent implements OnInit {
   }
 
   addToCart(gameId) {
-    //retrieve book from books array using the book id
+    //retrieve game from games array using the game id
     let game = this.games.find(game => {
       return game.id === +gameId;
     });
     let cartData = [];
     //retrieve cart data from localstorage
-    let data = localStorage.getItem('cart');
+    let data = sessionStorage.getItem('cart');
     //prse it to json
     if (data !== null) {
       cartData = JSON.parse(data);
@@ -71,7 +73,7 @@ export class ShopgameComponent implements OnInit {
     //updated the cartGames
     this.updateCartData(cartData);
     //save the updated cart data in localstorage
-    localStorage.setItem('cart', JSON.stringify(cartData));
+    sessionStorage.setItem('cart', JSON.stringify(cartData));
     //make the isAdded field of the game added to cart as true
     game.isAdded = true;
   }
@@ -81,12 +83,13 @@ export class ShopgameComponent implements OnInit {
   }
 
   goToCart() {
-    this.router.navigate(['/cart']);
+    this.gamesOut = this.games;
+    this.router.navigate(['shop/cart']);
   }
 
   emptyCart() {
     this.cartGames = [];
-    localStorage.clear();
+    sessionStorage.clear();
   }
 
   minimizer() {
@@ -96,10 +99,13 @@ export class ShopgameComponent implements OnInit {
       document.getElementById("carritob").style["bottom"] = '0px';
       document.getElementById("carritot").style["bottom"] = '350px';
       document.getElementById("carritob").style["z-index"] = '1';
+      document.getElementById("carritot").style["z-index"] = '1';
     } else {
       //minimizar
       document.getElementById("carritot").style["bottom"] = '0px';
       document.getElementById("carritob").style["bottom"] = '-350px';
+      document.getElementById("carritob").style["z-index"] = '0';
+      document.getElementById("carritot").style["z-index"] = '0';
     }
   }
 

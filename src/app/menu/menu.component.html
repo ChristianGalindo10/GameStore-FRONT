@@ -7,11 +7,10 @@
       <a href="#">Home</a>
       <a routerLink="/shop">Games</a>
       <a href="#">Deals</a>
-      <a href="#" *ngIf="isLogged">Shopping cart</a>
+      <a href="#" *ngIf="isLogged" routerLink="/shop">Shopping cart</a>
       <a href="#" *ngIf="!isLogged" routerLink="/login"><span class="material-icons">login</span>Log In</a>
-      <a href="#" *ngIf="isLogged" (click)="onLogOut()"><span class="material-icons">exit_to_app</span>Log Out</a>
       <div class="dropdown" *ngIf="isAdmin">
-        <a href="#">
+        <a>
           Admin
         </a>
         <div class="dropdown-content">
@@ -20,6 +19,7 @@
           <a routerLink="/admin/categories">Categories</a>
         </div>
       </div>
+      <a href="#" *ngIf="isLogged" (click)="onLogOut()"><span class="material-icons">exit_to_app</span>Log Out</a>
     </nav>
   </div>
 </header>

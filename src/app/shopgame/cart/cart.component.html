@@ -1,0 +1,22 @@
+<div id="carritob" style="margin-top:100px;">
+  <table id="main-container" class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Developer</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of cartGames;let i=index">
+        <th scope="row">{{game.id}}</th>
+        <td>{{game.name}}</td>
+        <td>{{game.developer}}</td>
+        <td>{{game.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-small btn-success" role="button" (click)="addPedido()">View Cart</a>
+  <a class="btn btn-small btn-warning" role="button" (click)="emptyCart()">Empty Cart</a>
+</div>

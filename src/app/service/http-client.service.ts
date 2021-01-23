@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/User';
 import { Game } from '../model/Game';
 import { Category } from '../model/Category';
+import { Pedido } from '../model/Pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +64,9 @@ export class HttpClientService {
 
   deleteCategory(id) {
     return this.httpClient.delete<Category>('http://localhost:8080/categories/' + id);
+  }
+
+  addPedido(newPedido){
+    return this.httpClient.post<Pedido>('http://localhost:8080/pedidos/add', newPedido);
   }
 }

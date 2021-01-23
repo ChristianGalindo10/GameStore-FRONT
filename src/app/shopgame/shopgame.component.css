@@ -34,6 +34,7 @@
 }
 
 .item{
+  z-index: 0;
   position: relative;
   overflow: hidden;
 }
@@ -50,10 +51,10 @@
   transition: all 0.5s ease-out ;
 }
 
-
+/*
 .item:hover .text {
   transform: translateY(2%);
-}
+}*/
 
 
 #catalogo img {
@@ -69,7 +70,6 @@
 .item:hover .zoom{
  transform: scale(1.02);
  opacity: 0.9;
-
 }
 
 .boton-agregar{
@@ -93,7 +93,8 @@
 	width:380px;
 	right:0px;
 	bottom:0px;
-	cursor:pointer;
+  cursor:pointer;
+  z-index: 1;
 }
 
 #carritob{
@@ -106,4 +107,5 @@
 	bottom:-350px;
 	right:0px;
   overflow-y:scroll;
+  z-index: 1;
 }

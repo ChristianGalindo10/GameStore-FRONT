@@ -20,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CategoriesComponent } from './admin/categories/categories.component';
 import { AddcategoryComponent } from './admin/categories/addcategory/addcategory.component';
-import { ViewcategoryComponent } from './admin/categories/viewcategory/viewcategory.component'
+import { ViewcategoryComponent } from './admin/categories/viewcategory/viewcategory.component';
+import { CartComponent } from './shopgame/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ViewcategoryComponent } from './admin/categories/viewcategory/viewcateg
     SigninComponent,
     CategoriesComponent,
     AddcategoryComponent,
-    ViewcategoryComponent
+    ViewcategoryComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
