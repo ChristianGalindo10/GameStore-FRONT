@@ -7,6 +7,7 @@ import { ShopgameComponent } from './shopgame/shopgame.component';
 import { CartComponent } from './shopgame/cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './login/signin/signin.component';
+import { HomeComponent } from './home/home.component';
 import { ProdGuardService as guard } from './guards/prod-guard.service';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'shop/cart', component: CartComponent,  canActivate: [guard], data: { expectedRol: ['user','admin'] } },
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
+  { path: 'home', component: HomeComponent },
 ];
 
 @NgModule({
