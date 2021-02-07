@@ -1,0 +1,92 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { TokenService } from '../service/token.service';
+import { Router } from '@angular/router';
+import { User } from '../model/User';
+import { HttpClientService } from '../service/http-client.service';
+import { Pedido } from '../model/Pedido';
+import { ToastrService } from 'ngx-toastr';
+import { Game } from '../model/Game';
+
+@Component({
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
+})
+export class CartComponent implements OnInit {
+
+  users: Array<User>;
+  user: User;
+  username: string;
+  pedido: Pedido;
+  games: any;
+  gamesObject: Array<Game>;
+
+  constructor(
+    private tokenService: TokenService,
+    private httpClientService: HttpClientService,
+    private toastr: ToastrService,
+    private router: Router) { }
+
+  ngOnInit(): void {
+    //this.games = this.DataService.getCartGames();
+    this.games = JSON.parse(sessionStorage.getItem('cart'));
+  }
+
+  addPedido() {
+    this.username = this.tokenService.getName();
+    this.httpClientService.getUsers().subscribe(
+      response => this.handleSuccessfulResponse(response),
+    );
+  }
+
+  goBack() {
+    this.router.navigate(['/shop']);
+  }
+
+  handleSuccessfulResponse(response) {
+    this.users = response;
+    this.user = this.users.find(user => {
+      return user.name === this.username;
+    });
+    this.pedido = new Pedido();
+    this.pedido.idUser = this.user.id;
+    this.gamesObject = new Array<Game>();
+    for (const game of this.games) {
+      const gameCart = new Game();
+      gameCart.id = game.id;
+      gameCart.categoryId = game.categoryId;
+      gameCart.idCatT = gameCart.categoryId;
+      gameCart.name = game.name;
+      //populate retrieved image field so that game image can be displayed
+      gameCart.retrievedImage = 'data:image/jpeg;base64,' + game.picByte;
+      gameCart.developer = game.developer;
+      gameCart.price = game.price;
+      gameCart.picByte = game.picByte;
+      //if (!this.gamesObject.includes(gameCart)){
+        this.gamesObject.push(gameCart);
+      //}
+    }
+    this.pedido.games = this.gamesObject;
+    this.httpClientService.addPedido(this.pedido).subscribe((pedido) => {
+      this.toastr.success('Order added', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+      this.router.navigate(['/shop']);
+    },
+      err => {
+        this.toastr.error("Error", 'Fail', {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
+      });
+      /*
+    for (let gameP of this.gamesObject) {
+      gameP.pedidos.push(this.pedido);
+      this.httpClientService.updateGame(gameP).subscribe((game) => {
+        this.toastr.success('Game updated', 'OK', {
+          timeOut: 3000, positionClass: 'toast-top-center'
+        });
+      });
+    }*/
+  }
+
+}

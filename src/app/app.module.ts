@@ -21,7 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CategoriesComponent } from './admin/categories/categories.component';
 import { AddcategoryComponent } from './admin/categories/addcategory/addcategory.component';
 import { ViewcategoryComponent } from './admin/categories/viewcategory/viewcategory.component';
-import { CartComponent } from './shopgame/cart/cart.component';
+import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({

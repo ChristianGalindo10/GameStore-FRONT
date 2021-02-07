@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let game of cartGames;let i=index">
+      <tr *ngFor="let game of games;let i=index">
         <th scope="row">{{game.id}}</th>
         <td>{{game.name}}</td>
         <td>{{game.developer}}</td>
@@ -17,6 +17,6 @@
       </tr>
     </tbody>
   </table>
-  <a class="btn btn-small btn-success" role="button" (click)="addPedido()">View Cart</a>
-  <a class="btn btn-small btn-warning" role="button" (click)="emptyCart()">Empty Cart</a>
+  <a class="btn btn-small btn-success" role="button" (click)="addPedido()">Confirm Order</a>
+  <a class="btn btn-small btn-warning" role="button" (click)="goBack()">Go Back</a>
 </div>

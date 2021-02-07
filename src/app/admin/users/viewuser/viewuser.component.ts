@@ -34,4 +34,8 @@ export class ViewuserComponent implements OnInit {
     );
   }
 
+  viewOrders(id: number) {
+    this.router.navigate(['pedidos'], {queryParams : {id}});
+  }
+
 }

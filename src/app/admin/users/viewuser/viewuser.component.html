@@ -14,7 +14,12 @@
       <th scope="row">User Type</th>
       <td>{{user.type}}</td>
     </tr>
+    <tr *ngFor="let pedido of user.pedidos">
+      <th>Pedido {{pedido.idPedido}}</th>
+      <td><p *ngFor="let game of pedido.games">{{game.name}}</p></td>
+    </tr>
   </table>
   <br>
-  <a class="btn btn-small btn-danger" (click)="deleteUser()"> delete</a>
+  <a class="btn btn-small btn-warning" (click)="viewOrders(user.id)">View Orders</a>
+  <a class="btn btn-small btn-danger" (click)="deleteUser()">Delete</a>
 </div>

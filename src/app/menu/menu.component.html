@@ -7,7 +7,7 @@
       <a href="#" routerLink="/home">Home</a>
       <a routerLink="/shop">Games</a>
       <a href="#">Deals</a>
-      <a href="#" *ngIf="isLogged" routerLink="/shop">Shopping cart</a>
+      <a href="#" *ngIf="isLogged" routerLink="/cart">Shopping cart</a>
       <a href="#" *ngIf="!isLogged" routerLink="/login"><span class="material-icons">login</span>Log In</a>
       <div class="dropdown" *ngIf="isAdmin">
         <a>

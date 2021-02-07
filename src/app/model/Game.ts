@@ -1,5 +1,3 @@
-import { Pedido } from "./Pedido";
-
 export class Game {
   id: number;
   name: string;
@@ -11,5 +9,4 @@ export class Game {
   picByte: string;
   retrievedImage: string;
   isAdded: boolean;
-  pedidos: Array<Pedido>;
 }

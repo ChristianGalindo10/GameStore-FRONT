@@ -12,8 +12,6 @@ export class ShopgameComponent implements OnInit {
 
   games: Array<Game>;
 
-  gamesOut: Array<Game>;
-
   gamesRecieved: Array<Game>;
   isOpen: boolean;
 
@@ -46,6 +44,8 @@ export class ShopgameComponent implements OnInit {
     for (const game of this.gamesRecieved) {
       const gamewithRetrievedImageField = new Game();
       gamewithRetrievedImageField.id = game.id;
+      gamewithRetrievedImageField.idCatT = game.idCatT;
+      gamewithRetrievedImageField.categoryId = game.categoryId;
       gamewithRetrievedImageField.name = game.name;
       //populate retrieved image field so that game image can be displayed
       gamewithRetrievedImageField.retrievedImage = 'data:image/jpeg;base64,' + game.picByte;
@@ -69,27 +69,31 @@ export class ShopgameComponent implements OnInit {
       cartData = JSON.parse(data);
     }
     // add the selected game to cart data
-    cartData.push(game);
-    //updated the cartGames
-    this.updateCartData(cartData);
-    //save the updated cart data in localstorage
-    sessionStorage.setItem('cart', JSON.stringify(cartData));
-    //make the isAdded field of the game added to cart as true
-    game.isAdded = true;
+    if(!game.isAdded){
+      cartData.push(game);
+      //save the updated cart data in localstorage
+      sessionStorage.setItem('cart', JSON.stringify(cartData));
+      data = sessionStorage.getItem('cart');
+      //updated the cartGames
+      cartData = JSON.parse(data);
+      this.updateCartData(cartData);
+      //make the isAdded field of the game added to cart as true
+      game.isAdded = true;
+    }
+
   }
 
   updateCartData(cartData) {
     this.cartGames = cartData;
-  }
+   }
 
   goToCart() {
-    this.gamesOut = this.games;
-    this.router.navigate(['shop/cart']);
+    this.router.navigate(['/cart']);
   }
 
   emptyCart() {
     this.cartGames = [];
-    sessionStorage.clear();
+    sessionStorage.setItem('cart', JSON.stringify(this.cartGames));
   }
 
   minimizer() {
