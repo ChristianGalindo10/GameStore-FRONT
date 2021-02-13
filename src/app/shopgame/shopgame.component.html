@@ -1,16 +1,31 @@
 <section id="catalogo">
+  <div class="text-center">
+    <h3 id="titulo-cat">Games filtered by: {{seleccionado}}</h3>
+    <select id="categoria" name="miselect" [(ngModel)]="seleccionado"
+      (change)="filter($event.target.value)">
+      <option value="all">All Games</option>
+      <option value="deals">Deals</option>
+      <option [value]="category.name" *ngFor="let category of categories">{{category.name}}</option>
+    </select>
+  </div>
   <div class="contenedor">
-    <article class="item" *ngFor="let game of games;let i=index">
+    <p *ngIf="gamesFilter!=null && gamesFilter.length==0">There are no games for this category</p>
+    <article class="item" *ngFor="let game of gamesFilter;let i=index">
       <a><img class="zoom" src="{{game.retrievedImage}}"></a>
-      <h4>{{game.name}}: ${{game.price-game.discount}}</h4>
-      <button type="button" class="btn btn-primary" (click)="setGame(game.id)" data-toggle="modal" data-target="#basicExampleModal">
+      <h4>{{game.name}}</h4>
+      <h5 class="precio">${{game.price-game.discount}}</h5>
+      <h6 *ngIf="game.discount!=0" class="discount">${{game.price}}</h6>
+      <br *ngIf="game.discount==0" />
+      <button type="button" class="btn btn-primary" (click)="setGame(game.id)" data-toggle="modal"
+        data-target="#basicExampleModal">
         Look Description
       </button>
-     <button class="boton-agregar" (click)="addToCart(game.id)"><i
+      <button class="boton-agregar" (click)="addToCart(game.id)"><i
           class="material-icons">add_shopping_cart</i></button>
     </article>
   </div>
-  <div *ngIf="dataLoad | async"  class="modal fade"  id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="dataLoad | async" class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -19,8 +34,11 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          {{gameDescription.description}}
+        <div class="modal-body text-center" style="display: flex;">
+          <div><img src="{{gameDescription.retrievedImage}}" style="border-radius: 4%"></div>
+          <div>
+            <p style="border-top-style: double;">{{gameDescription.description}}</p>
+          </div>
         </div>
         <div class="modal-footer">
         </div>
@@ -39,6 +57,7 @@
         <th>Name</th>
         <th>Developer</th>
         <th>Price</th>
+        <th>Action</th>
       <tr>
     </thead>
     <tbody>
@@ -46,12 +65,13 @@
         <th scope="row">{{game.id}}</th>
         <td>{{game.name}}</td>
         <td>{{game.developer}}</td>
-        <td>{{game.price}}</td>
+        <td>{{game.price-game.discount}}</td>
+        <td><a [routerLink]="" (click)="removeItemFromCart(game.id)"><span class="material-icons">
+          delete
+          </span></a></td>
       </tr>
     </tbody>
   </table>
   <a class="btn btn-small btn-success" role="button" (click)="goToCart()">View Cart</a>
   <a class="btn btn-small btn-warning" role="button" (click)="emptyCart()">Empty Cart</a>
 </div>
-
-

@@ -30,12 +30,12 @@ export class UsersComponent implements OnInit {
       (params) => {
         this.action = params['action'];
         const selectedUserId = params['id'];
-        
+
         if (selectedUserId) {
           this.selectedUser = this.users.find(user => user.id === +selectedUserId);
-         
+
         }
-        
+
       }
     );
   }
@@ -45,7 +45,7 @@ export class UsersComponent implements OnInit {
   }
 
   viewUser(id: number) {
-    this.router.navigate(['pedidos'], {queryParams : {id, action: 'view'}});
+    this.router.navigate(['admin', 'users'], {queryParams : {id, action: 'view'}});
   }
 
   addUser() {

@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from '../service/http-client.service';
 import { Game } from '../model/Game';
+import { Category } from '../model/Category';
 
 @Component({
   selector: 'app-shopgame',
@@ -11,12 +12,15 @@ import { Game } from '../model/Game';
 export class ShopgameComponent implements OnInit {
 
   games: Array<Game>;
-
   gamesRecieved: Array<Game>;
   isOpen: boolean;
   gameDescription : Game;
   cartGames: any;
   dataLoad: Promise<boolean>;
+  categories: Array<Category>;
+  seleccionado: string;
+  category: Category;
+  gamesFilter: Array<Game>;
 
   constructor(private router: Router, private httpClientService: HttpClientService) { }
 
@@ -24,6 +28,9 @@ export class ShopgameComponent implements OnInit {
   ngOnInit() {
     this.httpClientService.getGames().subscribe(
       response => this.handleSuccessfulResponse(response),
+    );
+    this.httpClientService.getCategories().subscribe(
+      response => this.handleSuccessfulResponse2(response),
     );
     //from localstorage retrieve the cart item
     let data = sessionStorage.getItem('cart');
@@ -34,6 +41,7 @@ export class ShopgameComponent implements OnInit {
       this.cartGames = [];
     }
     //this.isOpen = false;
+    this.seleccionado = "all";
   }
 
   // we will be taking the games response returned from the database
@@ -55,9 +63,10 @@ export class ShopgameComponent implements OnInit {
       gamewithRetrievedImageField.picByte = game.picByte;
       gamewithRetrievedImageField.discount = game.discount;
       gamewithRetrievedImageField.description=game.description;
+      gamewithRetrievedImageField.isAdded = false;
       this.games.push(gamewithRetrievedImageField);
     }
-    /*this.dataLoad = Promise.resolve(true);*/
+    this.gamesFilter = this.games;
   }
 
   addToCart(gameId) {
@@ -84,12 +93,37 @@ export class ShopgameComponent implements OnInit {
       //make the isAdded field of the game added to cart as true
       game.isAdded = true;
     }
-
   }
 
   updateCartData(cartData) {
     this.cartGames = cartData;
    }
+
+  removeItemFromCart (gameId) {
+    let game = this.games.find(game => {
+      return game.id === +gameId;
+    });
+    let cartData = [];
+    let data = sessionStorage.getItem('cart');
+    //parse it to json
+    if (data !== null) {
+      cartData = JSON.parse(data);
+    }
+    const found = cartData.find(element => element.id === game.id);
+    var i = cartData.indexOf(found);
+
+    if ( i !== -1 ) {
+      cartData.splice( i, 1 );
+    }
+    sessionStorage.setItem('cart', JSON.stringify(cartData));
+     data = sessionStorage.getItem('cart');
+     //updated the cartGames
+    cartData = JSON.parse(data);
+    this.updateCartData(cartData);
+    //make the isAdded field of the game added to cart as true
+    game.isAdded = false;
+}
+
 
   goToCart() {
     this.router.navigate(['/cart']);
@@ -116,6 +150,42 @@ export class ShopgameComponent implements OnInit {
       document.getElementById("carritot").style["z-index"] = '0';
     }
   }
+
+  filter(selected:string){
+    switch(selected) {
+      case "all": {
+        this.gamesFilter = new Array<Game>();
+        this.gamesFilter = this.games;
+         break;
+      }
+      case "deals": {
+        this.gamesFilter = new Array<Game>();
+        this.category = this.categories.find(category => category.name == selected);
+        for (const game of this.games) {
+          if(game.discount>0){
+            this.gamesFilter.push(game);
+          }
+        }
+         break;
+      }
+      default: {
+        this.gamesFilter = new Array<Game>();
+        this.category = this.categories.find(category => category.name == selected);
+        for (const game of this.games) {
+          if(game.categoryId === this.category.idCat){
+            this.gamesFilter.push(game);
+          }
+        }
+         break;
+      }
+   }
+  }
+
+  handleSuccessfulResponse2(response){
+    this.categories = response;
+  }
+
+
   setGame(id){
     this.gameDescription=this.games.find(game=>game.id=== +id);
     this.dataLoad = Promise.resolve(true);

@@ -9,8 +9,8 @@
           </thead>
       <tr *ngFor="let game of pedido.games" >
         <td scope="row">{{game.name}}</td>
-        <td>{{game.price}}</td>
+        <td>{{game.price-game.discount}}</td>
       </tr>
     </table>
- 
+
   </div>

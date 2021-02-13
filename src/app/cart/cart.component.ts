@@ -31,6 +31,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     //this.games = this.DataService.getCartGames();
     this.games = JSON.parse(sessionStorage.getItem('cart'));
+    this.totalValue=0;
+    for(let game of this.games){
+      this.totalValue += (game.price-game.discount);
+    }
   }
 
   addPedido() {
@@ -39,6 +43,32 @@ export class CartComponent implements OnInit {
       response => this.handleSuccessfulResponse(response),
     );
   }
+
+  removeItemFromCart (gameId) {
+    let game = this.games.find(game => {
+      return game.id === +gameId;
+    });
+    let cartData = [];
+    let data = sessionStorage.getItem('cart');
+    //parse it to json
+    if (data !== null) {
+      cartData = JSON.parse(data);
+    }
+    const found = cartData.find(element => element.id === game.id);
+    var i = cartData.indexOf(found);
+
+    if ( i !== -1 ) {
+      cartData.splice( i, 1 );
+    }
+    sessionStorage.setItem('cart', JSON.stringify(cartData));
+     data = sessionStorage.getItem('cart');
+     //updated the cartGames
+    cartData = JSON.parse(data);
+    this.games = cartData;
+    //make the isAdded field of the game added to cart as true
+    game.isAdded = false;
+    this.totalValue -= (game.price-game.discount);
+}
 
   goBack() {
     this.router.navigate(['/shop']);
@@ -64,8 +94,8 @@ export class CartComponent implements OnInit {
       gameCart.developer = game.developer;
       gameCart.price = game.price;
       gameCart.picByte = game.picByte;
-      this.totalValue += game.price;
-      console.log(this.totalValue);
+      gameCart.discount = game.discount;
+      this.totalValue += (game.price-game.discount);
       //if (!this.gamesObject.includes(gameCart)){
         this.gamesObject.push(gameCart);
       //}
@@ -84,16 +114,6 @@ export class CartComponent implements OnInit {
           timeOut: 3000, positionClass: 'toast-top-center',
         });
       });
-
-      /*
-    for (let gameP of this.gamesObject) {
-      gameP.pedidos.push(this.pedido);
-      this.httpClientService.updateGame(gameP).subscribe((game) => {
-        this.toastr.success('Game updated', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
-        });
-      });
-    }*/
   }
 
 }

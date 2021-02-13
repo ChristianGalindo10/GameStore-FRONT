@@ -1,11 +1,39 @@
 <section id="catalogo">
+  <div class="text-center">
+    <h3 id="titulo-cat">Games filtered by: {{seleccionado}}</h3>
+    <select id="categoria" name="miselect" [(ngModel)]="seleccionado" (change)="filter($event.target.value)">
+      <option value="all">All Games</option>
+      <option [value]="category.name" *ngFor="let category of categories">{{category.name}}</option>
+    </select>
+  </div>
     <div class="contenedor">
-      <article class="item" *ngFor="let game of games;let i=index">
+      <p *ngIf="gamesFilter!=null && gamesFilter.length==0">There are no games for this category</p>
+      <article class="item text-center" *ngFor="let game of gamesFilter;let i=index">
         <a><img class="zoom" src="{{game.retrievedImage}}"></a>
         <h4>{{game.name}}:  </h4>
         <h5 class="precio">${{game.price}}</h5>
-
+        <button type="button" class="btn btn-primary " (click)="setGame(game.id)" data-toggle="modal" data-target="#basicExampleModal">
+          Look Description
+        </button>
       </article>
+    </div>
+    <div *ngIf="dataLoad | async"  class="modal fade"  id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{gameDescription.name}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center" style="display: flex;">
+            <div><img src="{{gameDescription.retrievedImage}}" style="border-radius: 4%"></div>
+            <div><p style="border-top-style: double;">{{gameDescription.description}}</p></div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
     </div>
 </section>
 

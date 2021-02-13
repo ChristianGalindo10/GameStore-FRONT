@@ -19,13 +19,13 @@
 #categoria{
   margin: auto;
   height: 20px;
-  width: 98%;
+  width: 20%;
 }
 
 #titulo-cat{
   margin: 10px auto;
   text-align: center;
-  color: rgba(219, 106, 72, 0.966);
+  color: #007bff;
 }
 
 .item2{
@@ -79,9 +79,13 @@
 
 .precio{
   text-align: center;
-  margin-left:38%;
   color: seagreen;
-  padding-top: 5px;
+}
+
+.discount{
+  text-decoration: line-through red;
+  text-align: center;
+  color: red;
 }
 
 #carritot{
@@ -109,3 +113,8 @@
   overflow-y:scroll;
   z-index: 1;
 }
+
+h4,h5,h6{
+  margin: 0;
+}
+
