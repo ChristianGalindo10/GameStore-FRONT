@@ -23,6 +23,10 @@ import { AddcategoryComponent } from './admin/categories/addcategory/addcategory
 import { ViewcategoryComponent } from './admin/categories/viewcategory/viewcategory.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
+import { MygamesComponent } from './mygames/mygames.component';
+import { ViewOrderComponent } from './mygames/view-order/view-order.component';
+import { DealsComponent } from './deals/deals.component';
+import { CatalogoComponent } from './catalogo/catalogo.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { HomeComponent } from './home/home.component';
     AddcategoryComponent,
     ViewcategoryComponent,
     CartComponent,
-    HomeComponent
+    HomeComponent,
+    MygamesComponent,
+    ViewOrderComponent,
+    DealsComponent,
+    CatalogoComponent
   ],
   imports: [
     BrowserModule,

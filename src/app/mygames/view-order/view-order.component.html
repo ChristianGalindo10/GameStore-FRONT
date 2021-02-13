@@ -1,0 +1,16 @@
+<div class="pedidoDetails" *ngIf="pedido!=null">
+    <h2>Order details</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Game name</th>
+              <th scope="col">Game price</th>
+            </tr>
+          </thead>
+      <tr *ngFor="let game of pedido.games" >
+        <td scope="row">{{game.name}}</td>
+        <td>{{game.price}}</td>
+      </tr>
+    </table>
+ 
+  </div>

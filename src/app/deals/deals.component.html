@@ -1,0 +1,13 @@
+<section id="catalogo">
+    <div class="contenedor">
+      <article class="item" *ngFor="let game of games;let i=index">
+        <a><img class="zoom" src="{{game.retrievedImage}}"></a>
+        <h4>{{game.name}}:  </h4>
+        <h5 class="precio">${{game.price-game.discount}}</h5>
+        <h6 class="discount">${{game.price}}</h6>
+      </article>
+    </div>
+</section>
+
+  
+  

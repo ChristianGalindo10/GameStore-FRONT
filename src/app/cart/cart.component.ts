@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
   pedido: Pedido;
   games: any;
   gamesObject: Array<Game>;
+  totalValue : number;
 
   constructor(
     private tokenService: TokenService,
@@ -44,6 +45,7 @@ export class CartComponent implements OnInit {
   }
 
   handleSuccessfulResponse(response) {
+    this.totalValue=0;
     this.users = response;
     this.user = this.users.find(user => {
       return user.name === this.username;
@@ -62,15 +64,19 @@ export class CartComponent implements OnInit {
       gameCart.developer = game.developer;
       gameCart.price = game.price;
       gameCart.picByte = game.picByte;
+      this.totalValue += game.price;
+      console.log(this.totalValue);
       //if (!this.gamesObject.includes(gameCart)){
         this.gamesObject.push(gameCart);
       //}
     }
+    this.pedido.totalValue=this.totalValue;
     this.pedido.games = this.gamesObject;
     this.httpClientService.addPedido(this.pedido).subscribe((pedido) => {
       this.toastr.success('Order added', 'OK', {
         timeOut: 3000, positionClass: 'toast-top-center'
       });
+      sessionStorage.setItem('cart', JSON.stringify([]));
       this.router.navigate(['/shop']);
     },
       err => {
@@ -78,6 +84,7 @@ export class CartComponent implements OnInit {
           timeOut: 3000, positionClass: 'toast-top-center',
         });
       });
+
       /*
     for (let gameP of this.gamesObject) {
       gameP.pedidos.push(this.pedido);

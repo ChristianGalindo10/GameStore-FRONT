@@ -62,6 +62,8 @@ export class GamesComponent implements OnInit {
       gamewithRetrievedImageField.idCatT = game.idCatT;
       gamewithRetrievedImageField.categoryId = game.categoryId;
       gamewithRetrievedImageField.categoryName = game.categoryName;
+      gamewithRetrievedImageField.discount=game.discount;
+      gamewithRetrievedImageField.description=game.description;
       this.games.push(gamewithRetrievedImageField);
     }
   }

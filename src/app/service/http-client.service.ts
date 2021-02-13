@@ -69,4 +69,5 @@ export class HttpClientService {
   addPedido(newPedido){
     return this.httpClient.post<Pedido>('http://localhost:8080/pedidos/add', newPedido);
   }
+ 
 }

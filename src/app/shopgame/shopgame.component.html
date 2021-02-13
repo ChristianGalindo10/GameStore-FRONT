@@ -2,10 +2,30 @@
   <div class="contenedor">
     <article class="item" *ngFor="let game of games;let i=index">
       <a><img class="zoom" src="{{game.retrievedImage}}"></a>
-      <h4>{{game.name}}: ${{game.price}}</h4>
-      <button class="boton-agregar" (click)="addToCart(game.id)"><i
+      <h4>{{game.name}}: ${{game.price-game.discount}}</h4>
+      <button type="button" class="btn btn-primary" (click)="setGame(game.id)" data-toggle="modal" data-target="#basicExampleModal">
+        Look Description
+      </button>
+     <button class="boton-agregar" (click)="addToCart(game.id)"><i
           class="material-icons">add_shopping_cart</i></button>
     </article>
+  </div>
+  <div *ngIf="dataLoad | async"  class="modal fade"  id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{gameDescription.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{gameDescription.description}}
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <div id="carritot" (click)="minimizer()">
