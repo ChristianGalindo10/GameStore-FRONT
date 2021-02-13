@@ -7,8 +7,14 @@
   <label for="developer">Developer</label>
   <input type="text" class="form-control" id="developer" placeholder="developer" name="developer" [(ngModel)]="game.developer">
 
+  <label for="description">Description</label>
+  <textarea class="form-control"  name="description" [(ngModel)]="game.description"> </textarea>
+
   <label for="price">Price</label>
   <input type="number" class="form-control" id="price" placeholder="price" name="price" [(ngModel)]="game.price">
+
+  <label for="discount">Discount</label>
+  <input type="number" class="form-control" id="discount" placeholder="discount" max={{game.price}}  required name="discount" [(ngModel)]="game.discount">
 
   <label for="category">Category</label>
   <select name="categoryselect" [(ngModel)]="game.categoryId">

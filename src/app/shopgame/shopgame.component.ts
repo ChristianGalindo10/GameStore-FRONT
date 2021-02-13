@@ -14,8 +14,9 @@ export class ShopgameComponent implements OnInit {
 
   gamesRecieved: Array<Game>;
   isOpen: boolean;
-
+  gameDescription : Game;
   cartGames: any;
+  dataLoad: Promise<boolean>;
 
   constructor(private router: Router, private httpClientService: HttpClientService) { }
 
@@ -52,8 +53,11 @@ export class ShopgameComponent implements OnInit {
       gamewithRetrievedImageField.developer = game.developer;
       gamewithRetrievedImageField.price = game.price;
       gamewithRetrievedImageField.picByte = game.picByte;
+      gamewithRetrievedImageField.discount = game.discount;
+      gamewithRetrievedImageField.description=game.description;
       this.games.push(gamewithRetrievedImageField);
     }
+    /*this.dataLoad = Promise.resolve(true);*/
   }
 
   addToCart(gameId) {
@@ -111,6 +115,10 @@ export class ShopgameComponent implements OnInit {
       document.getElementById("carritob").style["z-index"] = '0';
       document.getElementById("carritot").style["z-index"] = '0';
     }
+  }
+  setGame(id){
+    this.gameDescription=this.games.find(game=>game.id=== +id);
+    this.dataLoad = Promise.resolve(true);
   }
 
 }

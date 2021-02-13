@@ -9,4 +9,6 @@ export class Game {
   picByte: string;
   retrievedImage: string;
   isAdded: boolean;
+  discount: number;
+  description: string;
 }

@@ -3,6 +3,7 @@ import { User } from '../../model/User';
 import { HttpClientService } from '../../service/http-client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -14,7 +15,6 @@ export class UsersComponent implements OnInit {
   users: Array<User>;
   selectedUser: User;
   action: string;
-
   constructor(private httpClientService: HttpClientService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -30,9 +30,12 @@ export class UsersComponent implements OnInit {
       (params) => {
         this.action = params['action'];
         const selectedUserId = params['id'];
+        
         if (selectedUserId) {
           this.selectedUser = this.users.find(user => user.id === +selectedUserId);
+         
         }
+        
       }
     );
   }

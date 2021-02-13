@@ -8,7 +8,10 @@ import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { HomeComponent } from './home/home.component';
+import { MygamesComponent } from './mygames/mygames.component';
 import { ProdGuardService as guard } from './guards/prod-guard.service';
+import { DealsComponent } from './deals/deals.component';
+import { CatalogoComponent } from './catalogo/catalogo.component';
 
 const routes: Routes = [
   { path: 'admin/users', component: UsersComponent,  canActivate: [guard], data: { expectedRol: ['admin'] } },
@@ -19,6 +22,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'mygames', component: MygamesComponent, canActivate: [guard], data: { expectedRol: ['user','admin'] } },
+  { path: 'Deals', component: DealsComponent },
+  { path: 'Catalogo', component: CatalogoComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full'}
 ];
 

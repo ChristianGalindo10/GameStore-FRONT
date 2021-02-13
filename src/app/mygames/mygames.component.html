@@ -1,0 +1,28 @@
+
+<h1 div class="contenedor">Orders</h1>
+<div class="container row " *ngIf="dataLoad | async" >
+    <h2 *ngIf="selectedUser==null">The user doesn't exist</h2>
+    <div class="col-md-6" *ngIf="selectedUser!=null">
+        <table class="table" *ngIf="selectedUser.pedidos.length!=0">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Total Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let pedido of selectedUser.pedidos" >
+            <td>{{pedido.idPedido}}</td>
+            <td>{{pedido.totalValue}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="viewOrders(pedido.idPedido,selectedUser.id)">Show Details</button></td>
+        </tr>
+        </tbody>
+        </table>
+        <div *ngIf="selectedUser.pedidos.length==0">
+            <p>There aren't orders</p>
+        </div>
+  </div>
+  <div   class="col-md-6">
+    <app-view-order *ngIf="action === 'view'" [pedido]="selectedPedido"></app-view-order>
+  </div>
+</div>
