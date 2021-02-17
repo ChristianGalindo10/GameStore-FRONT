@@ -32,11 +32,9 @@ export class CatalogoComponent implements OnInit {
     this.seleccionado = "all";
   }
 
-  // we will be taking the games response returned from the database
-  // and we will be adding the retrieved
+
   handleSuccessfulResponse(response) {
     this.games = new Array<Game>();
-    //get books returned by the api call
     this.gamesRecieved = response;
     for (const game of this.gamesRecieved) {
       const gamewithRetrievedImageField = new Game();

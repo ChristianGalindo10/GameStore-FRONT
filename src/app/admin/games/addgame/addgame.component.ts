@@ -53,7 +53,6 @@ export class AddgameComponent implements OnInit {
   }
 
   saveGame() {
-    //If there is no book id then it is an add book call else it is an edit book call
     if (this.game.id == null) {
       this.game.idCatT = this.game.categoryId;
       const uploadData = new FormData();
@@ -112,7 +111,7 @@ export class AddgameComponent implements OnInit {
         this.httpClient.post('http://localhost:8080/games/upload', uploadData, { observe: 'response' })
           .subscribe((response) => {
             if (response.status === 200) {
-              // ...
+
               this.httpClientService.updateGameI(this.game).subscribe(
                 (game) => {
                   this.toastr.success('Game updated', 'OK', {
@@ -129,7 +128,7 @@ export class AddgameComponent implements OnInit {
               );
               console.log('Image uploaded successfully');
             } else {
-              // ...
+              
               console.log('Image not uploaded successfully');
               this.toastr.error('Image not uploaded successfully', 'Fail', {
                 timeOut: 3000, positionClass: 'toast-top-center',

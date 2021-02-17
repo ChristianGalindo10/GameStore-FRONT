@@ -65,7 +65,7 @@ export class CartComponent implements OnInit {
      //updated the cartGames
     cartData = JSON.parse(data);
     this.games = cartData;
-    //make the isAdded field of the game added to cart as true
+    //make the isAdded field of the game added to cart as false
     game.isAdded = false;
     this.totalValue -= (game.price-game.discount);
 }

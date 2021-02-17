@@ -44,11 +44,8 @@ export class ShopgameComponent implements OnInit {
     this.seleccionado = "all";
   }
 
-  // we will be taking the games response returned from the database
-  // and we will be adding the retrieved
   handleSuccessfulResponse(response) {
     this.games = new Array<Game>();
-    //get books returned by the api call
     this.gamesRecieved = response;
     for (const game of this.gamesRecieved) {
       const gamewithRetrievedImageField = new Game();
@@ -70,14 +67,13 @@ export class ShopgameComponent implements OnInit {
   }
 
   addToCart(gameId) {
-    //retrieve game from games array using the game id
     let game = this.games.find(game => {
       return game.id === +gameId;
     });
     let cartData = [];
     //retrieve cart data from localstorage
     let data = sessionStorage.getItem('cart');
-    //prse it to json
+    //parse it to json
     if (data !== null) {
       cartData = JSON.parse(data);
     }
@@ -120,7 +116,7 @@ export class ShopgameComponent implements OnInit {
      //updated the cartGames
     cartData = JSON.parse(data);
     this.updateCartData(cartData);
-    //make the isAdded field of the game added to cart as true
+    //make the isAdded field of the game added to cart as false
     game.isAdded = false;
 }
 
