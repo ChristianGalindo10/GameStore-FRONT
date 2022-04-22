@@ -9,7 +9,7 @@ La aplicación Spring Boot(framework para desarrollo de aplicaciones java), es l
 
 Por último la aplicación Angular(framework para desarrollo de aplicaciones web, su principal lenguaje de programación es TypeScript), es la encargada de la interacción con el usuario, esta se encarga de desplegar la interfaz gráfica y atender las peticiones, comunicándolas a la aplicación Spring Boot. Luego de recibir una respuesta del lado servidor, la aplicación Angular procesa dicha respuesta para mostrarla en el lado cliente, obteniendo así una buena interacción con el usuario.
 
-[![Comportamiento](https://github.com/ChristianGalindo10/GameStore-FRONT/blob/master/Readme_assets/Comportamiento.png)]
+![Comportamiento](https://github.com/ChristianGalindo10/GameStore-FRONT/blob/master/Readme_assets/Comportamiento.png)
 
 
 ## Tecnologías utilizadas
@@ -33,7 +33,7 @@ spring.jackson.serialization.fail-on-empty-beans=false
 
 ## Resultado
 ***
-[![Resultado](https://github.com/ChristianGalindo10/GameStore-FRONT/blob/master/Readme_assets/VideoFinal.gif)
+![Resultado](https://github.com/ChristianGalindo10/GameStore-FRONT/blob/master/Readme_assets/VideoFinal.gif)
 
 ## Instrucciones Angular
 ***
