@@ -1,5 +1,6 @@
 # E-Commerce Gamer Front-end
 ***
+*[Documentación de diseño y arquitectura](https://github.com/ChristianGalindo10/GameStore-BACK/blob/main/Dise_o_de_Software.pdf)*
 
 El proyecto consiste en la elaboración de una plataforma web que implementa el comercio electrónico o e-commerce como es mayormente conocido, en el ámbito del mercado de los videojuegos. Para el desarrollo backend se utiliza un lenguaje core Java haciendo uso del framework Spring Boot, y para el desarrollo frontend (HTML,CSS y Scripting) se utiliza el framework Angular.
 
